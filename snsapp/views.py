@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 
+from snsapp.models import SnsModel
+
 # Create your views here.
 
 
@@ -26,9 +28,13 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            print('logged in!')
-            return render(request, 'login.html', {})
+            return redirect("list")
         else:
-            return render(request, 'login.html', {})
+            return render(request, "login.html", {})
 
     return render(request, "login.html", {})
+
+
+def list(request):
+    object_list = SnsModel.objects.all()
+    return render(request, "list.html", {"object_list": object_list})
