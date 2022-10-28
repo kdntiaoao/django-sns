@@ -26,9 +26,12 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            print('logged in!')
-            return render(request, 'login.html', {})
+            return redirect('list')
         else:
-            return render(request, 'login.html', {})
+            return render(request, "login.html", {})
 
     return render(request, "login.html", {})
+
+
+def list(request):
+    return render(request, "list.html", {})

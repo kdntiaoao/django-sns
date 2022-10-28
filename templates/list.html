@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block page_title %}一覧 | Django SNS{% endblock page_title %}
+
+{% block content %}
+<header class="border-bottom">
+    <div class="container d-flex align-items-center justify-content-between">
+        <h1 class="fs-3 my-3">SNS</h1>
+    </div>
+</header>
+<main class="pt-4">
+    <div class="container">
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <p class="h4">Pythonを勉強しました</p>
+                    <p class="m-0">投稿者：</p>
+                </li>
+                <li class="list-group-item">
+                    <p class="h4">富士山に登りました</p>
+                    <p class="m-0">投稿者：</p>
+                </li>
+                <li class="list-group-item">
+                    <p class="h4">週末に飲み会やります</p>
+                    <p class="m-0">投稿者：</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+{% endblock content %}
