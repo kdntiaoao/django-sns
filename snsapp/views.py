@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
@@ -14,9 +15,9 @@ def signup(request):
         password = request.POST["password"]
         try:
             user = User.objects.create_user(username, "", password)
-            return render(request, "signup.html", {})
+            return redirect("list")
         except IntegrityError:
-            return render(request, "signup.html", {"error": "すでに登録されています"})
+            return render(request, "signup.html", {"errors": {"username": "すでに登録されています"}})
 
     return render(request, "signup.html", {})
 
@@ -30,11 +31,16 @@ def login(request):
             auth_login(request, user)
             return redirect("list")
         else:
-            return render(request, "login.html", {})
+            return render(
+                request,
+                "login.html",
+                {"errors": {"username": "ログインに失敗しました", "password": "ログインに失敗しました"}},
+            )
 
     return render(request, "login.html", {})
 
 
+@login_required
 def list(request):
     object_list = SnsModel.objects.all()
     return render(request, "list.html", {"object_list": object_list})

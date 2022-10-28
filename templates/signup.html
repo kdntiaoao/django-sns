@@ -13,10 +13,10 @@
         <h1 class="h3 mb-3 fw-normal text-center">新規登録</h1>
 
         <div class="form-floating">
-            <input type="text" class="form-control  {{ error|yesno:'is-invalid,' }}" id="floatingInput" name="username" placeholder="name@example.com" required />
+            <input type="text" class="form-control  {{ errors.username|yesno:'is-invalid,' }}" id="floatingInput" name="username" placeholder="name@example.com" required />
             <label for="floatingInput">ユーザー名</label>
-            {% if error  %}
-                <div class="invalid-feedback">{{ error }}</div>
+            {% if errors.username  %}
+                <div class="invalid-feedback">{{ errors.username }}</div>
             {% endif %}
 
         </div>
