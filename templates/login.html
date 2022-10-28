@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block custom_css %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+{% endblock custom_css %}
 
 {% block page_title %}ログイン | Django SNS{% endblock page_title %}
 
 {% block content %}
 <main class="form-signin">
     <form method="POST">{% csrf_token %}
-        <h1 class="h3 mb-3 fw-normal">Please login</h1>
+        <h1 class="h3 mb-3 fw-normal text-center">ログイン</h1>
 
         <div class="form-floating">
             <input type="text" class="form-control  {{ error|yesno:'is-invalid,' }}" id="floatingInput" name="username" placeholder="name@example.com" required />
@@ -20,7 +25,9 @@
             <label for="floatingPassword">パスワード</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">ログイン</button>
+        <div class="my-3">
+            <button class="w-100 btn btn-lg btn-primary" type="submit">ログイン</button>
+        </div>
     </form>
 </main>
 {% endblock content %}
