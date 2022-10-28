@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render
@@ -14,10 +15,25 @@ def signup(request):
         password = request.POST["password"]
         try:
             user = User.objects.create_user(username, "", password)
-            return render(request, 'signup.html', {})
+            return render(request, "signup.html", {})
         except IntegrityError:
             return render(request, "signup.html", {"error": "すでに登録されています"})
     # else:
     #     print("this is not post method")
 
     return render(request, "signup.html", {})
+
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            print('logged in!')
+            return render(request, 'login.html', {})
+        else:
+            return render(request, 'login.html', {})
+
+    return render(request, "login.html", {})
