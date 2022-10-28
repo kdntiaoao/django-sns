@@ -10,8 +10,10 @@ class SnsModel(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     author = models.CharField(max_length=50)
-    sns_image = models.ImageField(upload_to="")
     good = models.IntegerField()
     read = models.IntegerField()
     readText = models.TextField()
     posted_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title

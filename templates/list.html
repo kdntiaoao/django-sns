@@ -24,6 +24,12 @@
                     <p class="h4">週末に飲み会やります</p>
                     <p class="m-0">投稿者：</p>
                 </li>
+                {% for object in object_list %}
+                <li class="list-group-item">
+                    <p class="h4">{{ object.title }}</p>
+                    <p class="m-0">投稿者：{{ object.author }}</p>
+                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
