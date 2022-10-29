@@ -10,9 +10,9 @@ class SnsModel(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     author = models.CharField(max_length=50)
-    good = models.IntegerField()
-    read = models.IntegerField()
-    readText = models.TextField()
+    good = models.IntegerField(default=0)
+    read = models.IntegerField(default=0)
+    readText = models.TextField(null=True, blank=True, default='')
     posted_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

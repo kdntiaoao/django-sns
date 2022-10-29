@@ -5,10 +5,19 @@
 {% block content %}
 <header class="border-bottom">
     <div class="container d-flex align-items-center justify-content-between">
-        <h1 class="fs-3 my-3">SNS</h1>
-        <a class="btn btn-outline-danger" href="{% url 'logout' %}">
-            ログアウト
-        </a>
+        <h1 class="fs-3 my-3">
+            <a href="{% url 'list' %}" class="text-reset text-decoration-none">
+                SNS
+            </a>
+        </h1>
+        <div class="d-flex gap-2">
+            <a class="btn btn-outline-success" href="{% url 'create' %}">
+                投稿する
+            </a>
+            <a class="btn btn-outline-danger" href="{% url 'logout' %}">
+                ログアウト
+            </a>
+        </div>
     </div>
 </header>
 <main class="pt-4">
@@ -19,7 +28,7 @@
                 <li class="list-group-item">
                     <a href="{% url 'detail' object.pk %}" class="text-reset text-decoration-none">
                         <div class="d-flex align-items-start gap-2">
-                            <div class="flex-fill">
+                            <div class="flex-grow-1">
                                 <p class="h4">{{ object.title }}</p>
                                 <p class="m-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -30,7 +39,7 @@
                                     {{ object.author }}
                                 </p>
                             </div>
-                            <div class="d-flex gap-2">
+                            <div class="d-flex flex-shrink-0 gap-2">
                                 <div class="btn btn-primary btn-sm disabled">
                                     いいね <span class="badge bg-light text-dark">{{ object.good }}</span>
                                 </div>

@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 from snsapp.models import SnsModel
 
@@ -84,3 +86,10 @@ def read(request, pk):
     object.save()
 
     return redirect("detail", pk=pk)
+
+
+class SnsCreateView(CreateView):
+    template_name: str = "create.html"
+    model = SnsModel
+    fields = ("title", "content", "author")
+    success_url = reverse_lazy("list")
