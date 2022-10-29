@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from snsapp.models import SnsModel
 
@@ -17,7 +17,9 @@ def signup(request):
             user = User.objects.create_user(username, "", password)
             return redirect("list")
         except IntegrityError:
-            return render(request, "signup.html", {"errors": {"username": "すでに登録されています"}})
+            return render(
+                request, "signup.html", {"errors": {"username": "すでに登録されています"}}
+            )
 
     return render(request, "signup.html", {})
 
@@ -45,6 +47,13 @@ def list(request):
     object_list = SnsModel.objects.all()
     return render(request, "list.html", {"object_list": object_list})
 
+
 def logout(request):
     auth_logout(request)
-    return redirect('login')
+    return redirect("login")
+
+
+@login_required
+def detail(request, pk):
+    object = get_object_or_404(SnsModel, pk=pk)
+    return render(request, "detail.html", {"object": object})
