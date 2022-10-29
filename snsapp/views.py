@@ -5,6 +5,7 @@ from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from snsapp.models import SnsModel
 
@@ -61,6 +62,7 @@ def detail(request, pk):
     return render(request, "detail.html", {"object": object})
 
 
+@login_required
 def good(request, pk):
     object = SnsModel.objects.get(pk=pk)
     object.good += 1
@@ -68,6 +70,7 @@ def good(request, pk):
     return redirect("detail", pk=pk)
 
 
+@login_required
 def read(request, pk):
     user_id = str(request.user.id)
     object = get_object_or_404(SnsModel, pk=pk)
@@ -88,7 +91,7 @@ def read(request, pk):
     return redirect("detail", pk=pk)
 
 
-class SnsCreateView(CreateView):
+class SnsCreateView(LoginRequiredMixin, CreateView):
     template_name: str = "create.html"
     model = SnsModel
     fields = ("title", "content", "author")
