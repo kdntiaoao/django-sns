@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signup, login, list, logout, detail, good
+from .views import signup, login, list, logout, detail, good, read, SnsCreateView
 
 urlpatterns = [
     path("signup/", signup, name="signup"),
@@ -8,4 +8,6 @@ urlpatterns = [
     path("logout/", logout, name="logout"),
     path("detail/<int:pk>", detail, name="detail"),
     path("good/<int:pk>", good, name="good"),
+    path("read/<int:pk>", read, name="read"),
+    path('create/', SnsCreateView.as_view(), name='create')
 ]
