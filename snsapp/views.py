@@ -18,6 +18,7 @@ def signup(request):
         password = request.POST["password"]
         try:
             user = User.objects.create_user(username, "", password)
+            auth_login(request, user)
             return redirect("list")
         except IntegrityError:
             return render(
