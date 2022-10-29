@@ -57,3 +57,10 @@ def logout(request):
 def detail(request, pk):
     object = get_object_or_404(SnsModel, pk=pk)
     return render(request, "detail.html", {"object": object})
+
+
+def good(request, pk):
+    object = SnsModel.objects.get(pk=pk)
+    object.good += 1
+    object.save()
+    return redirect("detail", pk=pk)

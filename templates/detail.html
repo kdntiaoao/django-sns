@@ -30,12 +30,12 @@
                 </div>
                 <p class="mb-4">内容：{{ object.content }}</p>
                 <div class="d-flex gap-3">
-                    <button type="button" class="btn btn-primary">
+                    <a href="{% url 'good' object.pk %}" class="btn btn-primary">
                         いいね <span class="badge bg-light text-dark">{{ object.good }}</span>
-                    </button>
-                    <button type="button" class="btn btn-info">
+                    </a>
+                    <a href="" class="btn btn-info">
                         既読 <span class="badge bg-light text-dark">{{ object.read }}</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
