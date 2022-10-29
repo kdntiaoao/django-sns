@@ -64,3 +64,23 @@ def good(request, pk):
     object.good += 1
     object.save()
     return redirect("detail", pk=pk)
+
+
+def read(request, pk):
+    user_id = str(request.user.id)
+    object = get_object_or_404(SnsModel, pk=pk)
+    readed_user_list = object.readText.split(",")
+
+    # 既読済みのユーザーのとき
+    if user_id in readed_user_list:
+        readed_user_list.remove(user_id)
+        object.read -= 1
+    # 未既読のユーザーのとき
+    else:
+        readed_user_list.append(user_id)
+        object.read += 1
+
+    object.readText = ",".join(readed_user_list)
+    object.save()
+
+    return redirect("detail", pk=pk)

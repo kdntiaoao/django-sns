@@ -47,7 +47,7 @@
                     <a href="{% url 'good' object.pk %}" class="btn btn-primary">
                         いいね <span class="badge bg-light text-dark">{{ object.good }}</span>
                     </a>
-                    <a href="" class="btn btn-secondary">
+                    <a href="{% url 'read' object.pk %}" class="btn btn-secondary">
                         既読 <span class="badge bg-light text-dark">{{ object.read }}</span>
                     </a>
                 </div>
